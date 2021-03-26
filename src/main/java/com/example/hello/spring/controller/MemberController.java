@@ -4,8 +4,12 @@ import com.example.hello.spring.domain.Member;
 import com.example.hello.spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
+
 
 // 스프링이 올라 올때 스프링이 애노테이션을 보고 객체를 생성해서 들고 있음
 // 스프링 빈이 관리된다고 보면됨.
@@ -55,6 +59,13 @@ public class MemberController {
         memberService.join(member);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> members = memberService.findMemberes();
+        model.addAttribute("members",members);
+        return "members/memberList";
     }
 
 }
