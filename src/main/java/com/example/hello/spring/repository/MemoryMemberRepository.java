@@ -1,9 +1,12 @@
 package com.example.hello.spring.repository;
 
 import com.example.hello.spring.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+
+@Repository // 데이터 저장
 public class MemoryMemberRepository implements MemberRpository {
 
     private static Map<Long, Member> store = new HashMap<>();

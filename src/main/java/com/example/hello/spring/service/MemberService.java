@@ -3,14 +3,18 @@ package com.example.hello.spring.service;
 import com.example.hello.spring.domain.Member;
 import com.example.hello.spring.repository.MemberRpository;
 import com.example.hello.spring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service //  스프링이 올라올때 서비스라고 인식 멤버서스로 등록해줌
 public class MemberService {
 
     private final MemberRpository memberRpository;
 
+    @Autowired // 멤버리퍼지 토리가 필요하다고 인식
     public MemberService(MemberRpository memberRpository) {
        this.memberRpository = memberRpository;
     }
