@@ -1,19 +1,16 @@
 package com.example.hello.spring.service;
 
 import com.example.hello.spring.domain.Member;
-import com.example.hello.spring.repository.MemberRpository;
-import com.example.hello.spring.repository.MemoryMemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.example.hello.spring.repository.MemberRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
 
-    private final MemberRpository memberRpository;
+    private final MemberRepository memberRpository;
 
-    public MemberService(MemberRpository memberRpository) {
+    public MemberService(MemberRepository memberRpository) {
        this.memberRpository = memberRpository;
     }
 

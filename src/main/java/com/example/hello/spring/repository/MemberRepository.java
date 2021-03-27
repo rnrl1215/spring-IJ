@@ -5,7 +5,7 @@ import com.example.hello.spring.domain.Member;
 import java.util.List;
 import java.util.Optional;
 
-public interface MemberRpository {
+public interface MemberRepository {
     Member save(Member member);
     //Optional null을 반환하는 대신 Optional로 감싸서 반환
     Optional<Member> findById(Long id);
