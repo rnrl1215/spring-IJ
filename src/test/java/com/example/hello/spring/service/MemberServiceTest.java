@@ -2,7 +2,6 @@ package com.example.hello.spring.service;
 
 import com.example.hello.spring.domain.Member;
 import com.example.hello.spring.repository.MemoryMemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,11 +14,11 @@ class MemberServiceTest {
     MemoryMemberRepository memberRepository;
 
     @BeforeEach
-    public void beforEach() {
+    public void beforeEach() {
         memberRepository = new MemoryMemberRepository();
         // 외부에서 넣어줌 DI 임.
         // 동일한 인스턴스를 사용하기 위해
-        MemberService memberService = new MemberService(memberRepository);
+        memberService = new MemberService(memberRepository);
     }
 
     @AfterEach
@@ -38,20 +37,19 @@ class MemberServiceTest {
         //when
         Long SaveId = memberService.join(member);
 
-
         //then
         Member findMember = memberService.findOne(SaveId).get();
         assertThat(member.getName()).isEqualTo(findMember.getName());
     }
 
     @Test
-    void findMemberes() {
+    void findMembers() {
         //given
         Member member1 = new Member();
-        member1.setName("spring1");
+        member1.setName("spring");
 
         Member member2 = new Member();
-        member2.setName("spring2");
+        member2.setName("spring");
 
         //when
         memberService.join(member1);
