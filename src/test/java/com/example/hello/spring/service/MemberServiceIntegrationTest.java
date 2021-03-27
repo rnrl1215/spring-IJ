@@ -1,31 +1,26 @@
 package com.example.hello.spring.service;
 
 import com.example.hello.spring.domain.Member;
+import com.example.hello.spring.repository.MemberRepository;
 import com.example.hello.spring.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class MemberServiceTest {
-    MemberService memberService;
-    MemoryMemberRepository memberRepository;
+@SpringBootTest // 스프링 컨테이너와 테스트를 함께 실행한다.
+@Transactional // Roll back 함. 즉 계속해서 TEST 가능함.
+class MemberServiceIntegrationTest {
 
-    @BeforeEach
-    public void beforEach() {
-        memberRepository = new MemoryMemberRepository();
-        // 외부에서 넣어줌 DI 임.
-        // 동일한 인스턴스를 사용하기 위해
-        MemberService memberService = new MemberService(memberRepository);
-    }
-
-    @AfterEach
-    public void afterEach() {
-        memberRepository.clearStore();
-    }
+    // test code 면 필드 기반으로 해도됨.
+    @Autowired MemberService memberService;
+    @Autowired MemberRepository memberRepository;
 
     @Test
     void join() {
@@ -37,7 +32,6 @@ class MemberServiceTest {
 
         //when
         Long SaveId = memberService.join(member);
-
 
         //then
         Member findMember = memberService.findOne(SaveId).get();
@@ -58,19 +52,6 @@ class MemberServiceTest {
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
         assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
 
- /*
-        try {
-            memberService.join(member2);
-            fail();
-        } catch (IllegalStateException e){
-            assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
-        }
- */
-
-        // then
     }
 
-    @Test
-    void findOne() {
-    }
 }

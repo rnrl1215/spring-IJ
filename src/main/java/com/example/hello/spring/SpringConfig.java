@@ -31,6 +31,10 @@ public class SpringConfig {
 
     @Bean
     public MemberRepository memberRpository() {
+        // Memory에서 DB를 사용하는 구조로 변경
+        // 내부 코드를 변경할 필요 없이 해당 내용으로 변경하면
+        // 스프링에서 알아서 변경해서 작동함.
+
         //return new MemoryMemberRepository();
         return new jdbcMemberRepository(dataSource);
     }

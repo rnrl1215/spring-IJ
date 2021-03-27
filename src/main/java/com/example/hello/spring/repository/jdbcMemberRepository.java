@@ -25,7 +25,6 @@ public class jdbcMemberRepository implements MemberRepository {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-
         try {
             conn = getConnection();
 
@@ -36,7 +35,6 @@ public class jdbcMemberRepository implements MemberRepository {
 
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
-
             if (rs.next()) {
                 member.setId(rs.getLong(1));
             } else {
