@@ -38,18 +38,20 @@ public class jdbcTemplateMemberRepository implements MemberRepository {
 
     @Override
     public Optional<Member> findById(Long id) {
-        List<Member> result = jdbcTemplate.query("select * from member where id = ?",memberRowMapper());
+        List<Member> result = jdbcTemplate.query("select * from member where id = ?",memberRowMapper(), id);
         return result.stream().findAny();
     }
 
     @Override
     public Optional<Member> findByName(String name) {
-        return Optional.empty();
+        List<Member> result = jdbcTemplate.query("select * from member where name = ?",memberRowMapper(), name);
+        return result.stream().findAny();
     }
 
     @Override
     public List<Member> findAll() {
-        return null;
+        List<Member> result = jdbcTemplate.query("select * from member",memberRowMapper());
+        return result;
     }
 
     /* 람다로 변경전
@@ -64,7 +66,7 @@ public class jdbcTemplateMemberRepository implements MemberRepository {
             }
         };
     }
-     */
+    */
 
     // 람다로 변경함
     // memberRowMapper를 이용히여 member를 리턴

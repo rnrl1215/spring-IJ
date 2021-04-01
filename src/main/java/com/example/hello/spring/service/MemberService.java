@@ -2,13 +2,19 @@ package com.example.hello.spring.service;
 
 import com.example.hello.spring.domain.Member;
 import com.example.hello.spring.repository.MemberRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+
+//JPA 를 사용할 경우 항상 트랜잭션이 있어야함.
+@Transactional
 public class MemberService {
 
     private final MemberRepository memberRepository;
+
+
 
     public MemberService(MemberRepository memberRepository) {
        this.memberRepository = memberRepository;
@@ -46,7 +52,7 @@ public class MemberService {
     /**
      * 전체 회원 조회
      */
-    public List<Member> findMemberes() {
+    public List<Member> findMembers() {
        return  memberRepository.findAll();
     }
 
